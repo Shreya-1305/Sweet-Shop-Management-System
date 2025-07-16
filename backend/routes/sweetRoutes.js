@@ -4,6 +4,7 @@ const sweetController = require("../controllers/sweetController");
 const router = express.Router();
 
 router.get("/search", sweetController.searchSweets);
+router.get("/sort", sweetController.sortSweets);
 
 router
   .route("/")

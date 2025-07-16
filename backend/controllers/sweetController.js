@@ -64,3 +64,21 @@ exports.searchSweets = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.sortSweets = async (req, res, next) => {
+  try {
+    const { sort } = req.query;
+    if (!sort) return next(new AppError("Please provide a sort field", 400));
+
+    const sortFields = sort.split(",").join(" ");
+    const sweets = await Sweet.find().sort(sortFields);
+
+    res.status(200).json({
+      status: "success",
+      results: sweets.length,
+      data: sweets,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
