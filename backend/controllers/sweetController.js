@@ -26,3 +26,16 @@ exports.deleteSweet = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getAllSweets = async (req, res, next) => {
+  try {
+    const sweets = await Sweet.find();
+    res.status(200).json({
+      status: "success",
+      results: sweets.length,
+      data: sweets,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
