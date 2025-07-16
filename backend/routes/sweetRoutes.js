@@ -10,6 +10,10 @@ router
   .route("/")
   .get(sweetController.getAllSweets)
   .post(sweetController.addSweet);
-router.route("/:id").delete(sweetController.deleteSweet);
+
+router
+  .route("/:id")
+  .get(sweetController.getSweetById)
+  .delete(sweetController.deleteSweet);
 
 module.exports = router;

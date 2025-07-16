@@ -82,3 +82,20 @@ exports.sortSweets = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getSweetById = async (req, res, next) => {
+  try {
+    const sweet = await Sweet.findById(req.params.id);
+    if (!sweet) return next(new AppError("Sweet not found", 404));
+
+    res.status(200).json({
+      status: "success",
+      data: sweet,
+    });
+  } catch (err) {
+    if (err.name === "CastError") {
+      return next(new AppError("Invalid sweet ID format", 400));
+    }
+    next(err);
+  }
+};
