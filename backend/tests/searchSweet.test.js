@@ -4,6 +4,7 @@ const Sweet = require("../models/sweetModel");
 
 describe("🔍 Search Sweets - GET /api/sweets/search", () => {
   beforeEach(async () => {
+    await Sweet.deleteMany();
     await Sweet.create([
       { name: "Kaju Katli", category: "nut-based", price: 80, quantity: 20 },
       { name: "Rasgulla", category: "milk-based", price: 50, quantity: 15 },
