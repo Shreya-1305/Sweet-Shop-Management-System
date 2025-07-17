@@ -1,5 +1,6 @@
 const express = require("express");
 const sweetRoutes = require("./routes/sweetRoutes");
+const inventoryRoutes = require("./routes/inventoryRoutes");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 
@@ -12,6 +13,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/sweets", sweetRoutes);
+app.use("/api/inventory", inventoryRoutes);
 
 app.all("*", (req, res, next) => {
   next(new AppError("Route not found", 404));
