@@ -72,6 +72,39 @@ export const SweetProvider = ({ children }) => {
     }));
   };
 
+  const addSweet = async (sweetData) => {
+    try {
+      const res = await axios.post(`${API_BASE}/sweets`, sweetData);
+      refreshSweets();
+      return res.data;
+    } catch (err) {
+      console.error("Error adding sweet:", err);
+      throw err;
+    }
+  };
+
+  const updateSweetById = async (id, updatedData) => {
+    try {
+      const res = await axios.patch(`${API_BASE}/sweets/${id}`, updatedData);
+      refreshSweets();
+      return res.data;
+    } catch (err) {
+      console.error("Error updating sweet:", err);
+      throw err;
+    }
+  };
+
+  const deleteSweetById = async (id) => {
+    try {
+      const res = await axios.delete(`${API_BASE}/sweets/${id}`);
+      refreshSweets();
+      return res.data;
+    } catch (err) {
+      console.error("Error deleting sweet:", err);
+      throw err;
+    }
+  };
+
   useEffect(() => {
     fetchSweets();
   }, [searchParams, sortBy, priceRange, refreshTrigger]);
@@ -88,6 +121,9 @@ export const SweetProvider = ({ children }) => {
         setPriceRange,
         refreshSweets,
         fetchSweets,
+        addSweet,
+        updateSweetById,
+        deleteSweetById,
       }}
     >
       {children}
