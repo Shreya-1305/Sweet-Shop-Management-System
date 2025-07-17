@@ -2,6 +2,7 @@ const request = require("supertest");
 const app = require("../app");
 const Sweet = require("../models/sweetModel");
 const mongoose = require("mongoose");
+const { afterEach } = require("node:test");
 
 describe("Update Sweet - PATCH /api/sweets/:id", () => {
   let sweet;
@@ -14,6 +15,10 @@ describe("Update Sweet - PATCH /api/sweets/:id", () => {
       price: 25,
       quantity: 50,
     });
+  });
+
+  afterEach(async () => {
+    await Sweet.deleteMany();
   });
 
   test("should update sweet name and price", async () => {

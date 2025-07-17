@@ -1,5 +1,5 @@
 const Sweet = require("../models/sweetModel");
-const AppError = require("../utils/appError"); // ✅ This is missing
+const AppError = require("../utils/appError");
 
 exports.addSweet = async (req, res, next) => {
   try {
@@ -90,6 +90,28 @@ exports.getSweetById = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
+      data: sweet,
+    });
+  } catch (err) {
+    if (err.name === "CastError") {
+      return next(new AppError("Invalid sweet ID format", 400));
+    }
+    next(err);
+  }
+};
+
+exports.updateSweet = async (req, res, next) => {
+  try {
+    const sweet = await Sweet.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!sweet) return next(new AppError("Sweet not found", 404));
+
+    res.status(200).json({
+      status: "success",
+      message: "Sweet updated successfully",
       data: sweet,
     });
   } catch (err) {

@@ -14,6 +14,7 @@ router
 router
   .route("/:id")
   .get(sweetController.getSweetById)
+  .patch(sweetController.updateSweet)
   .delete(sweetController.deleteSweet);
 
 module.exports = router;
