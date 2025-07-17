@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useNotification } from "./NotificationContext";
 
 const SweetContext = createContext();
 
@@ -11,6 +12,7 @@ export const SweetProvider = ({ children }) => {
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
   const [quantities, setQuantities] = useState({});
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const { showNotification } = useNotification();
 
   const API_BASE = "http://localhost:3000/api";
 
@@ -58,10 +60,13 @@ export const SweetProvider = ({ children }) => {
       await axios.patch(`${API_BASE}/inventory/${sweetId}/purchase`, {
         quantity,
       });
-      alert("Purchase successful");
+      showNotification("Purchase successful!", "success");
       refreshSweets();
     } catch (err) {
-      alert(err.response?.data?.message || "Purchase failed");
+      showNotification(
+        err.response?.data?.message || "Purchase failed",
+        "error"
+      );
     }
   };
 
@@ -76,9 +81,10 @@ export const SweetProvider = ({ children }) => {
     try {
       const res = await axios.post(`${API_BASE}/sweets`, sweetData);
       refreshSweets();
+      showNotification("Sweet added successfully!", "success");
       return res.data;
     } catch (err) {
-      console.error("Error adding sweet:", err);
+      showNotification("Failed to add sweet.", "error");
       throw err;
     }
   };
@@ -87,9 +93,10 @@ export const SweetProvider = ({ children }) => {
     try {
       const res = await axios.patch(`${API_BASE}/sweets/${id}`, updatedData);
       refreshSweets();
+      showNotification("Sweet updated successfully!", "info");
       return res.data;
     } catch (err) {
-      console.error("Error updating sweet:", err);
+      showNotification("Failed to update sweet.", "error");
       throw err;
     }
   };
@@ -98,9 +105,10 @@ export const SweetProvider = ({ children }) => {
     try {
       const res = await axios.delete(`${API_BASE}/sweets/${id}`);
       refreshSweets();
+      showNotification("Sweet deleted!", "warning");
       return res.data;
     } catch (err) {
-      console.error("Error deleting sweet:", err);
+      showNotification("Failed to delete sweet.", "error");
       throw err;
     }
   };
