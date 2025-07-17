@@ -10,6 +10,7 @@ export const SweetProvider = ({ children }) => {
   const [sortBy, setSortBy] = useState("");
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
   const [quantities, setQuantities] = useState({});
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const API_BASE = "http://localhost:3000/api";
 
@@ -47,6 +48,10 @@ export const SweetProvider = ({ children }) => {
     }
   };
 
+  const refreshSweets = () => {
+    setRefreshTrigger((prev) => prev + 1);
+  };
+
   const handlePurchase = async (sweetId) => {
     try {
       const quantity = quantities[sweetId];
@@ -54,7 +59,7 @@ export const SweetProvider = ({ children }) => {
         quantity,
       });
       alert("Purchase successful");
-      fetchSweets(); // Refresh after purchase
+      refreshSweets();
     } catch (err) {
       alert(err.response?.data?.message || "Purchase failed");
     }
@@ -69,7 +74,7 @@ export const SweetProvider = ({ children }) => {
 
   useEffect(() => {
     fetchSweets();
-  }, [searchParams, sortBy, priceRange]);
+  }, [searchParams, sortBy, priceRange, refreshTrigger]);
 
   return (
     <SweetContext.Provider
@@ -81,6 +86,8 @@ export const SweetProvider = ({ children }) => {
         setSearchParams,
         setSortBy,
         setPriceRange,
+        refreshSweets,
+        fetchSweets,
       }}
     >
       {children}

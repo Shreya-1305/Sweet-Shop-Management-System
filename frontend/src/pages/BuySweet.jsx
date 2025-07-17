@@ -24,6 +24,13 @@ const BuySweet = () => {
     setPriceRange({ min: minPrice, max: maxPrice });
     setSortBy(sortField);
   };
+  const formatCategory = (category) => {
+    return category
+      .replace(/-/g, " ")
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
 
   return (
     <div className="w-screen min-h-screen bg-[#FFF7E0] py-10 px-4 sm:px-10">
@@ -43,33 +50,33 @@ const BuySweet = () => {
         <input
           type="text"
           placeholder="Search by name"
-          className="border px-3 py-2 rounded"
+          className="bg-[#FFF1C1]/80 backdrop-blur-md px-3 py-2 rounded shadow-inner placeholder:text-[#B57E1F] text-[#5D3A00] focus:outline-none"
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Search by category"
-          className="border px-3 py-2 rounded"
+          className="bg-[#FFF1C1]/80 backdrop-blur-md px-3 py-2 rounded shadow-inner placeholder:text-[#B57E1F] text-[#5D3A00] focus:outline-none"
           value={searchCategory}
           onChange={(e) => setSearchCategory(e.target.value)}
         />
         <input
           type="number"
           placeholder="Min Price"
-          className="border px-3 py-2 rounded"
+          className="bg-[#FFF1C1]/80 backdrop-blur-md px-3 py-2 rounded shadow-inner placeholder:text-[#B57E1F] text-[#5D3A00] focus:outline-none"
           value={minPrice}
           onChange={(e) => setMinPrice(e.target.value)}
         />
         <input
           type="number"
           placeholder="Max Price"
-          className="border px-3 py-2 rounded"
+          className="bg-[#FFF1C1]/80 backdrop-blur-md px-3 py-2 rounded shadow-inner placeholder:text-[#B57E1F] text-[#5D3A00] focus:outline-none"
           value={maxPrice}
           onChange={(e) => setMaxPrice(e.target.value)}
         />
         <select
-          className="border px-3 py-2 rounded"
+          className="bg-[#FFF1C1]/80 backdrop-blur-md px-3 py-2 rounded shadow-inner text-[#5D3A00] focus:outline-none"
           value={sortField}
           onChange={(e) => setSortField(e.target.value)}
         >
@@ -103,7 +110,9 @@ const BuySweet = () => {
             <h3 className="text-xl font-semibold text-[#614419]">
               {sweet.name}
             </h3>
-            <p className="text-sm text-gray-600 mb-1">{sweet.category}</p>
+            <p className="text-sm text-gray-600 mb-1">
+              {formatCategory(sweet.category)}
+            </p>
             <p className="text-[#DB9A39] font-bold mb-2">₹{sweet.price}</p>
 
             <div className="flex items-center space-x-4 mb-4">
