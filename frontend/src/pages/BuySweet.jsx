@@ -35,7 +35,7 @@ const BuySweet = () => {
   return (
     <div className="w-screen min-h-screen bg-[#FFF7E0] py-10 px-4 sm:px-10">
       {/* Message Box */}
-      <div className="bg-white/80 backdrop-blur-md p-6 rounded-lg shadow-md mb-8 max-w-4xl mx-auto">
+      <div className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-md mb-8 max-w-4xl mx-auto">
         <h2 className="text-2xl font-semibold text-[#614419] mb-2 text-center">
           Welcome to Sweet Shop!
         </h2>
@@ -46,7 +46,7 @@ const BuySweet = () => {
       </div>
 
       {/* Filter Controls */}
-      <div className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-md mb-10 flex flex-wrap items-center justify-center gap-4 max-w-7xl mx-auto">
+      <div className="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-md mb-8 flex flex-wrap items-center justify-center gap-4 max-w-7xl mx-auto">
         <input
           type="text"
           placeholder="Search by name"
@@ -104,7 +104,7 @@ const BuySweet = () => {
               <img
                 src={sweet.imageUrl}
                 alt={sweet.name}
-                className="h-32 w-32 object-cover rounded-full mb-4 border-2 border-[#DB9A39]"
+                className="h-32 w-32 object-cover rounded-full mb-3 border-2 border-[#DB9A39]"
               />
             )}
             <h3 className="text-xl font-semibold text-[#614419]">
