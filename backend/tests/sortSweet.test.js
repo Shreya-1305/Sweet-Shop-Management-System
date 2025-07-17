@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Sweet = require("../models/sweetModel");
 
 describe("Sort Sweets - GET /api/sweets/sort", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await Sweet.deleteMany();
 
     await Sweet.create([
@@ -15,8 +15,8 @@ describe("Sort Sweets - GET /api/sweets/sort", () => {
     ]);
   });
 
-  afterAll(async () => {
-    await mongoose.connection.close();
+  afterEach(async () => {
+    await Sweet.deleteMany();
   });
 
   test("should return sweets sorted by name ascending", async () => {

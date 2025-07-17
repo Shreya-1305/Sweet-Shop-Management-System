@@ -3,7 +3,9 @@ const app = require("../app");
 const Sweet = require("../models/sweetModel");
 
 describe("Sweet Creation - POST /api/sweets", () => {
-  // Cleanup DB after each test
+  beforeEach(async () => {
+    await Sweet.deleteMany();
+  });
   afterEach(async () => {
     await Sweet.deleteMany();
   });

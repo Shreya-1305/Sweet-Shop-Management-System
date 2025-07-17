@@ -3,8 +3,8 @@ const app = require("../app");
 const Sweet = require("../models/sweetModel");
 
 describe("View All Sweets - GET /api/sweets", () => {
-  // Insert sample sweets before each test
   beforeEach(async () => {
+    await Sweet.deleteMany();
     await Sweet.create([
       {
         name: "Kaju Katli",
@@ -21,7 +21,6 @@ describe("View All Sweets - GET /api/sweets", () => {
     ]);
   });
 
-  // Clear database after each test
   afterEach(async () => {
     await Sweet.deleteMany();
   });

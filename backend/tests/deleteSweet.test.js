@@ -6,6 +6,7 @@ describe("Sweet Deletion - DELETE /api/sweets/:id", () => {
   let sweet;
 
   beforeEach(async () => {
+    await Sweet.deleteMany();
     sweet = await Sweet.create({
       name: "Jalebi",
       category: "milk-based",

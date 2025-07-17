@@ -16,8 +16,8 @@ describe("Get Sweet by ID - GET /api/sweets/:id", () => {
     });
   });
 
-  afterAll(async () => {
-    await mongoose.connection.close();
+  afterEach(async () => {
+    await Sweet.deleteMany();
   });
 
   test("should return a sweet with valid ID", async () => {
