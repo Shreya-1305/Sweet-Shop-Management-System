@@ -26,7 +26,7 @@ describe("View All Sweets - GET /api/sweets", () => {
     await Sweet.deleteMany();
   });
 
-  it("✅ should return all sweets with status 200", async () => {
+  it("should return all sweets with status 200", async () => {
     const res = await request(app).get("/api/sweets");
 
     expect(res.statusCode).toBe(200);
@@ -39,7 +39,7 @@ describe("View All Sweets - GET /api/sweets", () => {
     expect(sweetNames).toContain("Rasgulla");
   });
 
-  it("✅ should return an empty array when no sweets exist", async () => {
+  it("should return an empty array when no sweets exist", async () => {
     await Sweet.deleteMany(); // Ensure DB is empty
     const res = await request(app).get("/api/sweets");
 

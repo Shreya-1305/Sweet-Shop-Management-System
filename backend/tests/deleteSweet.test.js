@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../app");
 const Sweet = require("../models/sweetModel");
 
-describe("🗑️ Sweet Deletion - DELETE /api/sweets/:id", () => {
+describe("Sweet Deletion - DELETE /api/sweets/:id", () => {
   let sweet;
 
   beforeEach(async () => {
@@ -18,7 +18,7 @@ describe("🗑️ Sweet Deletion - DELETE /api/sweets/:id", () => {
     await Sweet.deleteMany();
   });
 
-  describe("✅ Valid Deletion", () => {
+  describe("Valid Deletion", () => {
     it("should delete a sweet by valid ID", async () => {
       const res = await request(app).delete(`/api/sweets/${sweet._id}`);
       expect(res.statusCode).toBe(204);
@@ -28,7 +28,7 @@ describe("🗑️ Sweet Deletion - DELETE /api/sweets/:id", () => {
     });
   });
 
-  describe("❌ Invalid or Non-existent IDs", () => {
+  describe("Invalid or Non-existent IDs", () => {
     it("should return 404 if sweet does not exist", async () => {
       const fakeId = "64b9b8b8b8b8b8b8b8b8b8b8"; // valid ObjectId format
       const res = await request(app).delete(`/api/sweets/${fakeId}`);

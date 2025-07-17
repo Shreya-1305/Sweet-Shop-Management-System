@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../app");
 const Sweet = require("../models/sweetModel");
 
-describe("🔍 Search Sweets - GET /api/sweets/search", () => {
+describe("Search Sweets - GET /api/sweets/search", () => {
   beforeEach(async () => {
     await Sweet.deleteMany();
     await Sweet.create([

@@ -32,6 +32,9 @@ const sweetSchema = new mongoose.Schema({
     required: [true, "A sweet must have quantity in stock"],
     min: [0, "Quantity must be a non-negative number"],
   },
+  imageUrl: {
+    type: String,
+  },
 });
 
 const Sweet = mongoose.model("Sweet", sweetSchema);

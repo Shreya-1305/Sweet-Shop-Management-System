@@ -2,13 +2,13 @@ const request = require("supertest");
 const app = require("../app");
 const Sweet = require("../models/sweetModel");
 
-describe("🍬 Sweet Creation - POST /api/sweets", () => {
+describe("Sweet Creation - POST /api/sweets", () => {
   // Cleanup DB after each test
   afterEach(async () => {
     await Sweet.deleteMany();
   });
 
-  describe("❌ Invalid Inputs", () => {
+  describe("Invalid Inputs", () => {
     it("should return 400 if no data is provided", async () => {
       const res = await request(app).post("/api/sweets").send({});
       expect(res.statusCode).toBe(400);
@@ -57,7 +57,7 @@ describe("🍬 Sweet Creation - POST /api/sweets", () => {
     });
   });
 
-  describe("✅ Valid Inputs", () => {
+  describe("Valid Inputs", () => {
     it("should create a sweet with all valid fields", async () => {
       const sweet = {
         name: "Gulab Jamun",

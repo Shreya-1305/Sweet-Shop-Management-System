@@ -1,9 +1,19 @@
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import BuySweet from "./pages/BuySweet";
+import { SweetProvider } from "./context/SweetContext";
+
+const App = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600">Sweet Shop Frontend</h1>
-    </div>
+    <SweetProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<BuySweet />} />
+        </Routes>
+      </BrowserRouter>
+    </SweetProvider>
   );
-}
+};
 
 export default App;
